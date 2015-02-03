@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Sidekiq hooks to push stats into Librato}
   s.test_files = Dir.glob("spec/**/*")
 
-  s.add_dependency(%q<sidekiq>, [">= 0"])
+  s.add_dependency(%q<sidekiq>, [">= 3.3.1"])
   s.add_dependency(%q<activesupport>, [">= 0"])
 
   s.add_development_dependency(%q<rspec>)

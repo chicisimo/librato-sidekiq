@@ -94,12 +94,14 @@ module Librato
 
       def submit_general_stats(group, stats)
         group.increment 'processed'
-        {
-          enqueued: nil,
-          failed: nil,
-          scheduled_size: 'scheduled'
-        }.each do |method, name|
-          group.measure((name || method).to_s, stats.send(method).to_i)
+        [
+          :enqueued,
+          :failed,
+          :retry_size,
+          :workers_size,
+          :scheduled_size
+        ].each do |method|
+          group.measure(method.to_s, stats.send(method).to_i)
         end
       end
 
