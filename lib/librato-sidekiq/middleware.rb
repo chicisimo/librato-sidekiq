@@ -81,7 +81,8 @@ module Librato
         tracking_group.group queue.to_s do |q|
           q.increment 'processed'
           q.timing 'time', elapsed
-          q.measure 'enqueued', stats.queues[queue].to_i
+          # Temp workaround for missing queues method in 3.3.1
+          q.measure 'enqueued', Sidekiq::Stats::Queues.new.lengths[queue].to_i
 
           # using something like User.delay.send_email invokes
           # a class name with slashes. remove them in favor of underscores
